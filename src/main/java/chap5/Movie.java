@@ -1,5 +1,7 @@
 package chap5;
 
+import chap5.condition.DiscountCondition;
+
 import java.util.List;
 
 public class Movie {
