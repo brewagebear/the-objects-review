@@ -1,15 +1,16 @@
 package chap2;
 
 
-import chap2.policy.AmountDiscountPolicy;
 import chap2.policy.NoneDiscountPolicy;
-import chap2.policy.condition.PeriodCondition;
-import chap2.policy.condition.SequenceCondition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.time.*;
-import static org.junit.Assert.*;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReservationTest {
 
