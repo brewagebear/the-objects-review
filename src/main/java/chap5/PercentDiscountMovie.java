@@ -1,8 +1,4 @@
-package chap5.Movie;
-
-import chap5.Money;
-import chap5.Movie;
-import chap5.DiscountCondition;
+package chap5;
 
 import java.time.Duration;
 import java.util.List;
