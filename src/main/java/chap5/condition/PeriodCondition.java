@@ -1,5 +1,6 @@
 package chap5.condition;
 
+import chap4.DiscountConditionType;
 import chap5.DiscountCondition;
 import chap5.Screening;
 
@@ -21,5 +22,22 @@ public class PeriodCondition implements DiscountCondition {
         return dayOfWeek.equals(screening.getWhenScreened().getDayOfWeek()) &&
                 startTime.compareTo(screening.getWhenScreened().toLocalTime()) <= 0 &&
                 endTime.compareTo(screening.getWhenScreened().toLocalTime()) >= 0;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    @Override
+    public DiscountConditionType getType() {
+        return DiscountConditionType.SEQUENCE;
     }
 }

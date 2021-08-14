@@ -7,6 +7,10 @@ public class Screening {
     private int sequence;
     private LocalDateTime whenScreened;
 
+    public Movie getMovie() {
+        return movie;
+    }
+
     public LocalDateTime getWhenScreened() {
         return whenScreened;
     }

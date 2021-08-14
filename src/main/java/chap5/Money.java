@@ -3,7 +3,7 @@ package chap5;
 import java.math.BigDecimal;
 
 public class Money {
-    public static final chap2.Money ZERO = chap2.Money.amountToWon(0);
+    public static final Money ZERO = Money.amountToWon(0);
 
     private final BigDecimal amount;
 
@@ -17,5 +17,8 @@ public class Money {
 
     public Money times(double discountPercent) {
         return new Money(this.amount.multiply(BigDecimal.valueOf(discountPercent)));
+    }
+    public static Money amountToWon(long amount) {
+        return new Money(BigDecimal.valueOf(amount));
     }
 }

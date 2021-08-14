@@ -1,7 +1,8 @@
 package chap5;
 
-import chap5.Screening;
+import chap4.DiscountConditionType;
 
 public interface DiscountCondition {
     boolean isSatisfiedBy(Screening screening);
+    DiscountConditionType getType();
 }

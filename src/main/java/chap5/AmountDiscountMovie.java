@@ -13,6 +13,11 @@ public class AmountDiscountMovie extends Movie {
     }
 
     @Override
+    protected MovieType getMovieType() {
+        return MovieType.AMOUNT_DISCOUNT;
+    }
+
+    @Override
     protected Money calculateDiscountAmount() {
         return discountAmount;
     }

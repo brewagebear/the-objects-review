@@ -13,6 +13,11 @@ public class PercentDiscountMovie extends Movie {
     }
 
     @Override
+    protected MovieType getMovieType() {
+        return MovieType.PERCENT_DISCOUNT;
+    }
+
+    @Override
     protected Money calculateDiscountAmount() {
         return getFee().times(percent);
     }
