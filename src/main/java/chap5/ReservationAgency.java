@@ -4,39 +4,25 @@ import chap4.DiscountConditionType;
 
 public class ReservationAgency {
     public Reservation reserve(Screening screening, Customer customer, int audienceCount) {
-        Movie movie = screening.getMovie();
+        boolean discountable = checkDiscountable(screening);
+        Money fee = calculateFee(screening, discountable, audienceCount);
+        return createReservation(screening, fee, audienceCount, customer);
+    }
 
-        boolean discountable = false;
-        for (DiscountCondition condition : movie.getDiscountConditions()) {
-            if (condition.getType() == DiscountConditionType.PERIOD) {
-                discountable = screening.getWhenScreened().getDayOfWeek().equals(condition.getDayOfWeek()) &&
-                        condition.getStartTime().compareTo(screening.getWhenScreened().toLocalTime()) <= 0 &&
-                        condition.getEndTime().compareTo(screening.getWhenScreened().toLocalTime()) >= 0;
-            } else {
-                discountable = condition.getSequence() == screening.getSequence();
-            }
+    private boolean checkDiscountable(Screening screening) {
+        return screening.getMovie()
+                .getDiscountConditions()
+                .stream()
+                .anyMatch(discountCondition -> discountCondition.isSatisfiedBy(screening));
+    }
 
-            if (discountable) {
-                break;
-            }
-        }
+    private Money calculateFee(Screening screening, boolean discountable, int audienceCount) {
+        return screening.getMovie()
+                .calculateMovieFee(screening)
+                .times(audienceCount);
+    }
 
-        Money fee;
-        if (discountable) {
-            Money discountAmount = Money.ZERO;
-            switch (movie.getMovieType()) {
-                case AMOUNT_DISCOUNT:
-                    discountAmount = movie.calculateDiscountAmount();
-                case PERCENT_DISCOUNT:
-                    discountAmount = movie.calculateDiscountAmount();
-                case NONE_DISCOUNT:
-                    discountAmount = Money.ZERO;
-                    break;
-            }
-            fee = movie.getFee().minus(discountAmount).times(audienceCount);
-        } else {
-            fee = movie.getFee().times(audienceCount);
-        }
+    private Reservation createReservation(Screening screening, Money fee, int audienceCount, Customer customer) {
         return new Reservation(customer, screening, fee, audienceCount);
     }
 }

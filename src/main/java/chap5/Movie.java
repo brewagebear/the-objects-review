@@ -39,4 +39,14 @@ public abstract class Movie {
     public List<DiscountCondition> getDiscountConditions() {
         return discountConditions;
     }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", runningTime=" + runningTime +
+                ", fee=" + fee +
+                ", discountConditions=" + discountConditions +
+                '}';
+    }
 }

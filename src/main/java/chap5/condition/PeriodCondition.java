@@ -24,18 +24,6 @@ public class PeriodCondition implements DiscountCondition {
                 endTime.compareTo(screening.getWhenScreened().toLocalTime()) >= 0;
     }
 
-    public DayOfWeek getDayOfWeek() {
-        return dayOfWeek;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
     @Override
     public DiscountConditionType getType() {
         return DiscountConditionType.SEQUENCE;

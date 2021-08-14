@@ -7,6 +7,12 @@ public class Screening {
     private int sequence;
     private LocalDateTime whenScreened;
 
+    public Screening(Movie movie, int sequence, LocalDateTime whenScreened) {
+        this.movie = movie;
+        this.sequence = sequence;
+        this.whenScreened = whenScreened;
+    }
+
     public Movie getMovie() {
         return movie;
     }
@@ -25,5 +31,14 @@ public class Screening {
 
     private Money calculateFee(int audienceCount) {
         return movie.calculateMovieFee(this).times(audienceCount);
+    }
+
+    @Override
+    public String toString() {
+        return "Screening{" +
+                "movie=" + movie +
+                ", sequence=" + sequence +
+                ", whenScreened=" + whenScreened +
+                '}';
     }
 }
