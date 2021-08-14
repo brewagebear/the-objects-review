@@ -1,45 +1,33 @@
 package chap5;
 
-import chap5.condition.DiscountCondition;
-
+import java.time.Duration;
 import java.util.List;
 
-public class Movie {
+public abstract class Movie {
     private String title;
+    private Duration runningTime;
     private Money fee;
     private List<DiscountCondition> discountConditions;
 
-    private MovieType movieType;
-    private Money discountAmount;
-    private double discountPercent;
+    abstract protected Money calculateDiscountAmount();
 
-    private Money calculateDiscountAmount() {
-        switch (movieType) {
-            case AMOUNT_DISCOUNT:
-                return calculateAmountDiscountAmount();
-            case PERCENT_DISCOUNT:
-                return calculatePercentDiscountAmount();
-            case NONE_DISCOUNT:
-                return calculateNoneDiscountAmount();
-        }
+    public Movie(String title, Duration runningTime, Money fee,
+                 List<DiscountCondition> discountConditions) {
+        this.title = title;
+        this.runningTime = runningTime;
+        this.fee = fee;
+        this.discountConditions = discountConditions;
     }
 
-    private Money calculateAmountDiscountAmount() {
-        return discountAmount;
-    }
-
-    private Movie calculatePercentDiscountAmount() {
-        return fee.times(discountPercent);
-    }
-
-    private Money calculateNoneDiscountAmount() {
-        return Money.ZERO;
+    protected Money getFee() {
+        return fee;
     }
 
     public Money calculateMovieFee(Screening screening) {
         if(isDiscountable(screening)) {
             return fee.minus(calculateDiscountAmount());
         }
+        return fee;
     }
 
     private boolean isDiscountable(Screening screening) {
