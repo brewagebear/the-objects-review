@@ -1,6 +1,5 @@
 package chap5;
 
-import javax.annotation.processing.Generated;
 import java.time.LocalDateTime;
 
 public class Screening {
